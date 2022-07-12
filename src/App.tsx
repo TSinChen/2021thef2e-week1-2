@@ -1,7 +1,7 @@
-import "./styles/reset.scss";
+import "./styles/index.css";
 
 function App() {
-  return <div>APP</div>;
+  return <div className="max-w-[1200px] mx-auto">APP</div>;
 }
 
 export default App;
