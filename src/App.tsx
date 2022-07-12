@@ -1,7 +1,14 @@
+import { Fragment } from "react";
+
 import "./styles/index.css";
+import Header from "./containers/Header";
 
 function App() {
-  return <div className="max-w-[1200px] mx-auto">APP</div>;
+  return (
+    <Fragment>
+      <Header />
+    </Fragment>
+  );
 }
 
 export default App;
