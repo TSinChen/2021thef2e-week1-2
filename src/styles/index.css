@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  letter-spacing: 0.03em;
+}
+
 body {
   font-family: "Noto Sans TC", sans-serif;
 }
