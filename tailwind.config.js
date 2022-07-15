@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navbar: "#646464",
+        "custom-gray-1": "#646464",
       },
     },
   },
