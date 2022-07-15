@@ -6,6 +6,7 @@ module.exports = {
         "custom-gray-1": "#646464",
         "custom-gray-2": "#2f2f2f",
         "custom-gray-3": "#1e1e1e",
+        "custom-orange": "#FF725E",
       },
     },
   },
