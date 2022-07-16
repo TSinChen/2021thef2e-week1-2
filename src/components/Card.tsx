@@ -12,7 +12,7 @@ type Props = {
 
 const Card = ({ type, id, pictureUrl, name, city }: Props) => {
   return (
-    <li className="w-[255px] group">
+    <li className="w-[255px] not-last:mr-[30px] group">
       <a href={`/${type}/${id}`}>
         <div className="w-full h-[200px] mb-[10px] rounded-[20px] overflow-hidden">
           <img
