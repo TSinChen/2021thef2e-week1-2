@@ -9,6 +9,7 @@ import Title from "../../components/Title";
 import * as Type from "../../types/apiResult";
 import { SearchType } from "../../types/enums";
 import { cityNameMapping } from "../../utils/functions";
+import * as C from "../../components/SingleDataPage";
 
 const InfoListItem = ({
   label,
@@ -65,7 +66,7 @@ const SpotPage = () => {
   }, [spot]);
 
   return (
-    <div className="mt-[60px] mb-[120px]">
+    <C.Container>
       <Breadcrumbs
         routes={[
           { label: "首頁", link: "/" },
@@ -81,46 +82,30 @@ const SpotPage = () => {
           { label: spot?.ScenicSpotName || "", link: "" },
         ]}
       />
-      <img
+      <C.Banner
         src={spot?.Picture.PictureUrl1}
-        alt={spot?.Picture.PictureDescription1 || ""}
-        className="w-full h-[400px] my-[30px] object-cover rounded-[24px]"
+        alt={spot?.Picture.PictureDescription1}
       />
-      <p className="mb-[15px] text-[36px] leading-[52px] font-light">
-        {spot?.ScenicSpotName}
-      </p>
-      <div className="flex [&>*]:mr-[10px] mb-[30px]">
+      <C.Name name={spot?.ScenicSpotName} />
+      <C.Tags>
         {spot?.Class1 && <Tag label={spot.Class1} />}
         {spot?.Class2 && <Tag label={spot.Class2} />}
         {spot?.Class3 && <Tag label={spot.Class3} />}
-      </div>
-      <div className="mb-[60px]">
-        <p className="mb-[10px] text-[20px] leading-[29px] font-bold">
-          景點介紹：
-        </p>
-        <p className="text-[18px] leading-[31px] font-light">
-          {spot?.DescriptionDetail}
-        </p>
-      </div>
-      <div className="mb-[60px] flex justify-between items-center">
-        <ul className="flex flex-col w-[540px] bg-[#F9F9F9] p-[30px] rounded-[12px] justify-between">
+      </C.Tags>
+      <C.Description type="景點" description={spot?.DescriptionDetail} />
+      <C.InfoContainer>
+        <C.DetailContainer>
           <InfoListItem label="開放時間" content={spot?.OpenTime} />
           <InfoListItem label="服務電話" content={spot?.Phone} />
           <InfoListItem label="景點地址" content={spot?.Address} />
           <InfoListItem label="官方網站" content={spot?.WebsiteUrl} />
           <InfoListItem label="票價資訊" content={spot?.TicketInfo} />
           <InfoListItem label="注意事項" content={spot?.Remarks} />
-        </ul>
-        <div className="rounded-[12px] overflow-hidden">
-          <iframe
-            width="540"
-            height="250"
-            src={`https://maps.google.com/maps?q=${spot?.Position.PositionLat},${spot?.Position.PositionLon}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
-            scrolling="no"
-            title="map"
-          />
-        </div>
-      </div>
+        </C.DetailContainer>
+        <C.GoogleMap
+          query={`${spot?.Position.PositionLat},${spot?.Position.PositionLon}`}
+        />
+      </C.InfoContainer>
       {spot?.City && (
         <Title
           title="還有這些不能錯過的景點"
@@ -139,7 +124,7 @@ const SpotPage = () => {
           />
         ))}
       </ul>
-    </div>
+    </C.Container>
   );
 };
 
