@@ -73,3 +73,22 @@ const SpotSchema = z.object({
 });
 export type Spot = z.infer<typeof SpotSchema>;
 export type SpotList = Spot[];
+
+const RestaurantSchema = z.object({
+  RestaurantID: z.string(),
+  RestaurantName: z.ostring(),
+  Description: z.ostring(),
+  Address: z.ostring(),
+  ZipCode: z.ostring(),
+  Phone: z.ostring(),
+  OpenTime: z.ostring(),
+  WebsiteUrl: z.ostring(),
+  Picture: PictureSchema,
+  ParkingPosition: PositionSchema,
+  ParkingInfo: z.ostring(),
+  City: z.ostring(),
+  SrcUpdateTime: z.string(),
+  UpdateTime: z.string(),
+});
+export type Restaurant = z.infer<typeof RestaurantSchema>;
+export type RestaurantList = Restaurant[];
