@@ -44,3 +44,32 @@ const ActivitySchema = z.object({
 });
 export type Activity = z.infer<typeof ActivitySchema>;
 export type ActivityList = Activity[];
+
+const SpotSchema = z.object({
+  ScenicSpotID: z.string(),
+  ScenicSpotName: z.ostring(),
+  DescriptionDetail: z.ostring(),
+  Description: z.ostring(),
+  Phone: z.ostring(),
+  Address: z.ostring(),
+  ZipCode: z.ostring(),
+  TravelInfo: z.ostring(),
+  OpenTime: z.ostring(),
+  Picture: PictureSchema,
+  MapUrl: z.ostring(),
+  Class1: z.ostring(),
+  Class2: z.ostring(),
+  Class3: z.ostring(),
+  Level: z.ostring(),
+  WebsiteUrl: z.ostring(),
+  ParkingInfo: z.ostring(),
+  ParkingPosition: PositionSchema,
+  TicketInfo: z.ostring(),
+  Remarks: z.ostring(),
+  Keyword: z.ostring(),
+  City: z.ostring(),
+  SrcUpdateTime: z.string(),
+  UpdateTime: z.string(),
+});
+export type Spot = z.infer<typeof SpotSchema>;
+export type SpotList = Spot[];
