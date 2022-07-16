@@ -123,6 +123,7 @@ const SingleActivityPage = () => {
       <ul className="flex">
         {recommendList.map((item) => (
           <Card
+            key={item.ActivityID}
             type={SearchType.Activity}
             id={item.ActivityID}
             pictureUrl={item.Picture.PictureUrl1}

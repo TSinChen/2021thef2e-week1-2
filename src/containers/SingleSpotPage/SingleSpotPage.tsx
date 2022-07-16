@@ -115,6 +115,7 @@ const SpotPage = () => {
       <ul className="flex justify-between">
         {recommendList.map((item) => (
           <Card
+            key={item.ScenicSpotID}
             type={SearchType.ScenicSpot}
             id={item.ScenicSpotID}
             pictureUrl={item.Picture.PictureUrl1}
