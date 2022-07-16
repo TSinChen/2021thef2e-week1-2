@@ -1,8 +1,9 @@
 import { Fragment } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./styles/index.css";
 import Header from "./containers/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from "./containers/Footer";
 import MainPage from "./containers/MainPage/MainPage";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           </Routes>
         </main>
       </BrowserRouter>
+      <Footer />
     </Fragment>
   );
 }
