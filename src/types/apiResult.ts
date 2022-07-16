@@ -9,6 +9,9 @@ export type Name = z.infer<typeof NameSchema>;
 const CitySchema = z.ostring();
 export type City = z.infer<typeof CitySchema>;
 
+const DescriptionSchema = z.ostring();
+export type Description = z.infer<typeof DescriptionSchema>;
+
 const PictureSchema = z.object({
   PictureUrl1: z.ostring(),
   PictureDescription1: z.ostring(),
@@ -28,7 +31,7 @@ const PositionSchema = z.object({
 const ActivitySchema = z.object({
   ActivityID: IdSchema,
   ActivityName: NameSchema,
-  Description: z.ostring(),
+  Description: DescriptionSchema,
   Particpation: z.ostring(),
   Location: z.ostring(),
   Address: z.ostring(),
@@ -48,7 +51,7 @@ const ActivitySchema = z.object({
   ParkingInfo: z.ostring(),
   Charge: z.ostring(),
   Remarks: z.ostring(),
-  City: z.ostring(),
+  City: CitySchema,
   SrcUpdateTime: z.string(),
   UpdateTime: z.string(),
 });
@@ -59,7 +62,7 @@ const SpotSchema = z.object({
   ScenicSpotID: IdSchema,
   ScenicSpotName: NameSchema,
   DescriptionDetail: z.ostring(),
-  Description: z.ostring(),
+  Description: DescriptionSchema,
   Phone: z.ostring(),
   Address: z.ostring(),
   ZipCode: z.ostring(),
@@ -78,7 +81,7 @@ const SpotSchema = z.object({
   TicketInfo: z.ostring(),
   Remarks: z.ostring(),
   Keyword: z.ostring(),
-  City: z.ostring(),
+  City: CitySchema,
   SrcUpdateTime: z.string(),
   UpdateTime: z.string(),
 });
@@ -88,7 +91,7 @@ export type SpotList = Spot[];
 const RestaurantSchema = z.object({
   RestaurantID: IdSchema,
   RestaurantName: NameSchema,
-  Description: z.ostring(),
+  Description: DescriptionSchema,
   Address: z.ostring(),
   ZipCode: z.ostring(),
   Phone: z.ostring(),
@@ -97,7 +100,7 @@ const RestaurantSchema = z.object({
   Picture: PictureSchema,
   ParkingPosition: PositionSchema,
   ParkingInfo: z.ostring(),
-  City: z.ostring(),
+  City: CitySchema,
   SrcUpdateTime: z.string(),
   UpdateTime: z.string(),
 });
