@@ -3,9 +3,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navbar: "#646464",
+        "custom-gray-1": "#646464",
+        "custom-gray-2": "#2f2f2f",
+        "custom-gray-3": "#1e1e1e",
+        "custom-orange": "#FF725E",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

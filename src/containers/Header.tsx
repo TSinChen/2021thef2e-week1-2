@@ -24,7 +24,7 @@ const Header = () => {
       <ul className="flex">
         {NAV_ITEMS.map((nav) => (
           <li key={nav.title} className="pr-[20px] last:pr-0">
-            <a href={nav.link} className="text-navbar text-[18px]">
+            <a href={nav.link} className="text-custom-gray-1 text-[18px]">
               {nav.title}
             </a>
           </li>
