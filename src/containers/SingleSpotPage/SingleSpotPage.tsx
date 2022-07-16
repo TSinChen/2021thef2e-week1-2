@@ -102,7 +102,7 @@ const SpotPage = () => {
           <InfoListItem label="注意事項" content={spot?.Remarks} />
         </C.DetailContainer>
         <C.GoogleMap
-          query={`${spot?.Position.PositionLat},${spot?.Position.PositionLon}`}
+          query={`${spot?.Position?.PositionLat},${spot?.Position?.PositionLon}`}
         />
       </C.InfoContainer>
       {spot?.City && (

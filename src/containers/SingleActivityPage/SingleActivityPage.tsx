@@ -110,7 +110,7 @@ const SingleActivityPage = () => {
           <InfoListItem label="注意事項" content={activity?.Remarks} />
         </C.DetailContainer>
         <C.GoogleMap
-          query={`${activity?.Position.PositionLat},${activity?.Position.PositionLon}`}
+          query={`${activity?.Position?.PositionLat},${activity?.Position?.PositionLon}`}
         />
       </C.InfoContainer>
       {activity?.City && (

@@ -28,7 +28,7 @@ const PositionSchema = z.object({
   GeoHash: z.ostring(),
 });
 
-const ActivitySchema = z.object({
+export const ActivitySchema = z.object({
   ActivityID: IdSchema,
   ActivityName: NameSchema,
   Description: DescriptionSchema,
@@ -43,7 +43,7 @@ const ActivitySchema = z.object({
   NonCycle: z.ostring(),
   WebsiteUrl: z.ostring(),
   Picture: PictureSchema,
-  Position: PositionSchema,
+  Position: z.optional(PositionSchema),
   Class1: z.ostring(),
   Class2: z.ostring(),
   MapUrl: z.ostring(),
@@ -56,9 +56,10 @@ const ActivitySchema = z.object({
   UpdateTime: z.string(),
 });
 export type Activity = z.infer<typeof ActivitySchema>;
+export const ActivityListSchema = z.array(ActivitySchema);
 export type ActivityList = Activity[];
 
-const SpotSchema = z.object({
+export const SpotSchema = z.object({
   ScenicSpotID: IdSchema,
   ScenicSpotName: NameSchema,
   DescriptionDetail: z.ostring(),
@@ -70,14 +71,14 @@ const SpotSchema = z.object({
   OpenTime: z.ostring(),
   Picture: PictureSchema,
   MapUrl: z.ostring(),
-  Position: PositionSchema,
+  Position: z.optional(PositionSchema),
   Class1: z.ostring(),
   Class2: z.ostring(),
   Class3: z.ostring(),
   Level: z.ostring(),
   WebsiteUrl: z.ostring(),
   ParkingInfo: z.ostring(),
-  ParkingPosition: PositionSchema,
+  ParkingPosition: z.optional(PositionSchema),
   TicketInfo: z.ostring(),
   Remarks: z.ostring(),
   Keyword: z.ostring(),
@@ -86,9 +87,10 @@ const SpotSchema = z.object({
   UpdateTime: z.string(),
 });
 export type Spot = z.infer<typeof SpotSchema>;
+export const SpotListSchema = z.array(SpotSchema);
 export type SpotList = Spot[];
 
-const RestaurantSchema = z.object({
+export const RestaurantSchema = z.object({
   RestaurantID: IdSchema,
   RestaurantName: NameSchema,
   Description: DescriptionSchema,
@@ -98,11 +100,14 @@ const RestaurantSchema = z.object({
   OpenTime: z.ostring(),
   WebsiteUrl: z.ostring(),
   Picture: PictureSchema,
-  ParkingPosition: PositionSchema,
+  Position: z.optional(PositionSchema),
+  Class: z.ostring(),
+  MapUrl: z.ostring(),
   ParkingInfo: z.ostring(),
   City: CitySchema,
   SrcUpdateTime: z.string(),
   UpdateTime: z.string(),
 });
 export type Restaurant = z.infer<typeof RestaurantSchema>;
+export const RestaurantListSchema = z.array(RestaurantSchema);
 export type RestaurantList = Restaurant[];
