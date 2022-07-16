@@ -8,11 +8,16 @@ type Props = {
   pictureUrl: Type.Picture["PictureUrl1"];
   name: Type.Name;
   city: Type.City;
+  liStyle?: string;
 };
 
-const Card = ({ type, id, pictureUrl, name, city }: Props) => {
+const Card = ({ type, id, pictureUrl, name, city, liStyle }: Props) => {
   return (
-    <li className="w-[255px] not-last:mr-[30px] group">
+    <li
+      className={`w-[255px] mr-[30px] [&:nth-child(4n)]:mr-0 group${
+        liStyle ? ` ${liStyle}` : ""
+      }`}
+    >
       <a href={`/${type}/${id}`}>
         <div className="w-full h-[200px] mb-[10px] rounded-[20px] overflow-hidden">
           <img
