@@ -30,8 +30,11 @@ const ActivityCard = ({ activity }: Props) => {
             <img src={POINTER} alt="" className="mr-[4px]" />
             <span>{activity.City}</span>
           </p>
-          <a href="/" className="text-[#7F977B] flex items-center">
-            <span className="font-medium ">詳細介紹</span>
+          <a
+            href={`/Activity/${activity.ActivityID}`}
+            className="text-[#7F977B] flex items-center"
+          >
+            <span className="font-medium">詳細介紹</span>
             <ChevronRight />
           </a>
         </div>
