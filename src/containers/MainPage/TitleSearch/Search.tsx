@@ -49,7 +49,6 @@ const Search = () => {
               inputProps={{
                 ...params.inputProps,
               }}
-              // InputProps={{ style: { height: "50px" } }}
             />
           )}
         />
