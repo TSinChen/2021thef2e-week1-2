@@ -1,3 +1,4 @@
+import { CITIES } from "./const";
 import { SearchType } from "../types/enums";
 
 export const searchTypeMapping = (type: SearchType) => {
@@ -10,3 +11,6 @@ export const searchTypeMapping = (type: SearchType) => {
       return "品嚐美食";
   }
 };
+
+export const cityNameMapping = (ch: string) =>
+  CITIES.find((city) => city.label === ch)?.value || "";

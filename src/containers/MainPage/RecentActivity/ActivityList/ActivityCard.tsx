@@ -15,7 +15,7 @@ const ActivityCard = ({ activity }: Props) => {
         <img
           src={activity.Picture.PictureUrl1}
           alt={activity.ActivityName}
-          className="w-[100%] h-[100%] object-cover group-hover:scale-110 duration-200"
+          className="w-full h-full object-cover group-hover:scale-110 duration-200"
         />
       </div>
       <div className="flex flex-1 pt-[16px] pb-[18px] px-[30px] flex-col">
