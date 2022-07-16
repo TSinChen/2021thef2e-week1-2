@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
 import * as Type from "../../../../types/apiResult";
-import { getList } from "../../../../api/apis";
-import { SearchType } from "../../../../types/enums";
+import { getActivityList } from "../../../../api/apis";
 import { DATE_FORMAT } from "../../../../utils/const";
 import ActivityCard from "./ActivityCard";
 
@@ -14,8 +13,7 @@ const ActivityList = () => {
     const startDateMax = dayjs().add(7, "day").format(DATE_FORMAT);
     const endDateMin = dayjs().add(1, "day").format(DATE_FORMAT);
 
-    getList(
-      SearchType.Activity,
+    getActivityList(
       "",
       `StartTime le ${startDateMax} and EndTime ge ${endDateMin} and Picture/PictureUrl1 ne null`
     )

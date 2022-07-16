@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { getList } from "../../api/apis";
+import { getSpotList } from "../../api/apis";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Card from "../../components/Card";
 import Tag from "../../components/Tag";
@@ -50,14 +50,13 @@ const SpotPage = () => {
   const [recommendList, setRecommendList] = useState<Type.SpotList>([]);
 
   useEffect(() => {
-    getList(SearchType.ScenicSpot, "", `ScenicSpotID eq '${spotId}'`)
+    getSpotList("", `ScenicSpotID eq '${spotId}'`)
       .then((r: Type.SpotList) => setSpot(r[0]))
       .catch((err) => console.error(err));
   }, [spotId]);
 
   useEffect(() => {
-    getList(
-      SearchType.ScenicSpot,
+    getSpotList(
       spot?.City ? cityNameMapping(spot.City) : "",
       `Picture/PictureUrl1 ne null and ScenicSpotID ne '${spotId}'`
     )
@@ -75,7 +74,7 @@ const SpotPage = () => {
             ? [
                 {
                   label: spot.City,
-                  link: `/ScenicSpot/${cityNameMapping(spot.City)}`,
+                  link: `/ScenicSpot?city=${cityNameMapping(spot.City)}`,
                 },
               ]
             : []),
@@ -103,19 +102,20 @@ const SpotPage = () => {
           <InfoListItem label="注意事項" content={spot?.Remarks} />
         </C.DetailContainer>
         <C.GoogleMap
-          query={`${spot?.Position.PositionLat},${spot?.Position.PositionLon}`}
+          query={`${spot?.Position?.PositionLat},${spot?.Position?.PositionLon}`}
         />
       </C.InfoContainer>
       {spot?.City && (
         <Title
           title="還有這些不能錯過的景點"
           linkText={`更多${spot.City}景點`}
-          linkHref={`/ScenicSpot/${cityNameMapping(spot.City)}`}
+          linkHref={`/ScenicSpot?city=${cityNameMapping(spot.City)}`}
         />
       )}
       <ul className="flex justify-between">
         {recommendList.map((item) => (
           <Card
+            key={item.ScenicSpotID}
             type={SearchType.ScenicSpot}
             id={item.ScenicSpotID}
             pictureUrl={item.Picture.PictureUrl1}
