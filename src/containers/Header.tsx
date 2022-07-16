@@ -3,7 +3,7 @@ import LOGO from "../images/logo-desktop.svg";
 const NAV_ITEMS = [
   {
     title: "探索景點",
-    link: "#",
+    link: "/ScenicSpot",
   },
   {
     title: "節慶活動",
