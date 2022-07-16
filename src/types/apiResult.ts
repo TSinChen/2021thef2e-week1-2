@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+const IdSchema = z.string();
+export type Id = z.infer<typeof IdSchema>;
+
+const NameSchema = z.ostring();
+export type Name = z.infer<typeof NameSchema>;
+
+const CitySchema = z.ostring();
+export type City = z.infer<typeof CitySchema>;
+
 const PictureSchema = z.object({
   PictureUrl1: z.ostring(),
   PictureDescription1: z.ostring(),
@@ -8,6 +17,7 @@ const PictureSchema = z.object({
   PictureUrl3: z.ostring(),
   PictureDescription3: z.ostring(),
 });
+export type Picture = z.infer<typeof PictureSchema>;
 
 const PositionSchema = z.object({
   PositionLon: z.onumber(),
@@ -16,8 +26,8 @@ const PositionSchema = z.object({
 });
 
 const ActivitySchema = z.object({
-  ActivityID: z.string(),
-  ActivityName: z.ostring(),
+  ActivityID: IdSchema,
+  ActivityName: NameSchema,
   Description: z.ostring(),
   Particpation: z.ostring(),
   Location: z.ostring(),
@@ -46,8 +56,8 @@ export type Activity = z.infer<typeof ActivitySchema>;
 export type ActivityList = Activity[];
 
 const SpotSchema = z.object({
-  ScenicSpotID: z.string(),
-  ScenicSpotName: z.ostring(),
+  ScenicSpotID: IdSchema,
+  ScenicSpotName: NameSchema,
   DescriptionDetail: z.ostring(),
   Description: z.ostring(),
   Phone: z.ostring(),
@@ -57,6 +67,7 @@ const SpotSchema = z.object({
   OpenTime: z.ostring(),
   Picture: PictureSchema,
   MapUrl: z.ostring(),
+  Position: PositionSchema,
   Class1: z.ostring(),
   Class2: z.ostring(),
   Class3: z.ostring(),
@@ -75,8 +86,8 @@ export type Spot = z.infer<typeof SpotSchema>;
 export type SpotList = Spot[];
 
 const RestaurantSchema = z.object({
-  RestaurantID: z.string(),
-  RestaurantName: z.ostring(),
+  RestaurantID: IdSchema,
+  RestaurantName: NameSchema,
   Description: z.ostring(),
   Address: z.ostring(),
   ZipCode: z.ostring(),
