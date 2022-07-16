@@ -7,6 +7,7 @@ import Footer from "./containers/Footer";
 import MainPage from "./containers/MainPage/MainPage";
 import SingleSpotPage from "./containers/SingleSpotPage/SingleSpotPage";
 import SingleActivityPage from "./containers/SingleActivityPage/SingleActivityPage";
+import SingleRestaurantPage from "./containers/SingleRestaurantPage/SingleRestaurantPage";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
             <Route
               path="/Activity/:activityId"
               element={<SingleActivityPage />}
+            />
+            <Route
+              path="/Restaurant/:restaurantId"
+              element={<SingleRestaurantPage />}
             />
             {/* <Route path="/ScenicSpot" element={<div>LIST</div>} /> */}
           </Routes>
