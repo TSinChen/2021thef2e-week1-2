@@ -77,7 +77,7 @@ const SingleActivityPage = () => {
             ? [
                 {
                   label: activity.City,
-                  link: `/Activity/${cityNameMapping(activity.City)}`,
+                  link: `/Activity?city=${cityNameMapping(activity.City)}`,
                 },
               ]
             : []),
@@ -117,7 +117,7 @@ const SingleActivityPage = () => {
         <Title
           title="還有這些不能錯過的活動"
           linkText={`更多${activity.City}景點`}
-          linkHref={`/Activity/${cityNameMapping(activity.City)}`}
+          linkHref={`/Activity?city=${cityNameMapping(activity.City)}`}
         />
       )}
       <ul className="flex">

@@ -16,12 +16,12 @@ function App() {
         <main className="max-w-[1200px] mx-auto px-[45px]">
           <Routes>
             <Route path="/" element={<MainPage />} />
-            {/* <Route path="/ScenicSpot" element={<SpotPage />} /> */}
             <Route path="/ScenicSpot/:spotId" element={<SingleSpotPage />} />
             <Route
               path="/Activity/:activityId"
               element={<SingleActivityPage />}
             />
+            {/* <Route path="/ScenicSpot" element={<div>LIST</div>} /> */}
           </Routes>
         </main>
       </BrowserRouter>

@@ -74,7 +74,7 @@ const SpotPage = () => {
             ? [
                 {
                   label: spot.City,
-                  link: `/ScenicSpot/${cityNameMapping(spot.City)}`,
+                  link: `/ScenicSpot?city=${cityNameMapping(spot.City)}`,
                 },
               ]
             : []),
@@ -109,7 +109,7 @@ const SpotPage = () => {
         <Title
           title="還有這些不能錯過的景點"
           linkText={`更多${spot.City}景點`}
-          linkHref={`/ScenicSpot/${cityNameMapping(spot.City)}`}
+          linkHref={`/ScenicSpot?city=${cityNameMapping(spot.City)}`}
         />
       )}
       <ul className="flex justify-between">
