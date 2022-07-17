@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { getActivityList } from "../../api/apis";
+import { getActivityList, getSingleActivityById } from "../../api/apis";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Card from "../../components/Card";
 import Tag from "../../components/Tag";
@@ -53,8 +53,8 @@ const SingleActivityPage = () => {
   const [recommendList, setRecommendList] = useState<Type.ActivityList>([]);
 
   useEffect(() => {
-    getActivityList("", `ActivityID eq '${activityId}'`)
-      .then((r: Type.ActivityList) => setActivity(r[0]))
+    getSingleActivityById(activityId as string)
+      .then((r: Type.Activity) => setActivity(r))
       .catch((err) => console.error(err));
   }, [activityId]);
 
