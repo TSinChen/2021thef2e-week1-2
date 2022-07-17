@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import qs from "query-string";
@@ -29,52 +29,56 @@ const TOPICS = [
 
 const ActivityListPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchCity, setSearchCity] = useState<null | typeof CITIES[number]>(
     null
   );
   const [searchDate, setSearchDate] = useState(dayjs().format("YYYY-MM-DD"));
-  const [keyword, setKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [activityList, setActivityList] = useState<Type.ActivityList>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const query = {
+      ...(searchCity?.value ? { city: searchCity.value } : {}),
+      ...(searchDate ? { date: searchDate } : {}),
+      ...(searchKeyword ? { keyword: searchKeyword } : {}),
+    };
+    navigate(`/Activity?${qs.stringify(query)}`);
+  };
+
+  const handleSearchClass = (topic: string) => {
+    const query = { ...qs.parse(location.search), topic };
+    navigate(`/Activity?${qs.stringify(query)}`);
+  };
+
+  useEffect(() => {
+    const city = qs.parse(location.search)?.city as string;
+    const date = qs.parse(location.search)?.date as string;
+    const keyword = qs.parse(location.search)?.keyword as string;
+    const topic = qs.parse(location.search)?.topic as string;
+    const targetCity = CITIES.find((c) => c.value === city);
+    if (targetCity) {
+      setSearchCity(targetCity);
+    }
+    if (date) {
+      setSearchDate(date);
+    }
+    if (keyword) {
+      setSearchKeyword(keyword);
+    }
     getActivityList(
-      searchCity?.value || "",
+      targetCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null${
-        searchDate
-          ? ` and StartTime le ${searchDate} and EndTime ge ${searchDate}`
-          : ""
-      }${
         keyword
           ? ` and (indexOf(ActivityName, '${keyword}') gt -1 or indexOf(Description, '${keyword}') gt -1)`
           : ""
+      }${date ? ` and StartTime le ${date} and EndTime ge ${date}` : ""}${
+        topic ? ` and (Class1 eq '${topic}' or Class2 eq '${topic}')` : ""
       }`
     )
       .then((r: Type.ActivityList) => setActivityList(r))
       .catch((err) => console.error(err));
-  };
-
-  const handleSearchClass = (topic: string) => {
-    getActivityList(
-      searchCity?.value || "",
-      `Picture/PictureUrl1 ne null and City ne null and (Class1 eq '${topic}' or Class2 eq '${topic}')`
-    )
-      .then((r: Type.ActivityList) => setActivityList(r))
-      .catch((err) => console.error(err));
-  };
-
-  useEffect(() => {
-    const city = qs.parse(location.search)?.city;
-    const targetCity = CITIES.find((c) => c.value === city);
-    if (typeof city === "string" && targetCity) {
-      setSearchCity(targetCity);
-      getActivityList(
-        targetCity.value,
-        `Picture/PictureUrl1 ne null and City ne null`
-      )
-        .then((r: Type.ActivityList) => setActivityList(r))
-        .catch((err) => console.error(err));
-    }
   }, [location]);
 
   return (
@@ -113,8 +117,8 @@ const ActivityListPage = () => {
         <div className="w-[600px]">
           <TextField
             fullWidth
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
             placeholder="想找有趣的？請輸入關鍵字"
           />
         </div>
