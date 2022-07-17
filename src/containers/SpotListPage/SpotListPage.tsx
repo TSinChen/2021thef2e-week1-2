@@ -16,7 +16,6 @@ import topic05 from "../../images/topic/spot/05.svg";
 import topic06 from "../../images/topic/spot/06.svg";
 import topic07 from "../../images/topic/spot/07.svg";
 import { getSpotList } from "../../api/apis";
-import Card from "../../components/Card";
 import { SearchType } from "../../types/enums";
 
 const TOPICS = [
@@ -41,7 +40,7 @@ const SpotListPage = () => {
     e.preventDefault();
     getSpotList(
       searchCity?.value || "",
-      `Picture/PictureUrl1 ne null${
+      `Picture/PictureUrl1 ne null and City ne null${
         keyword ? ` and indexOf(Keyword, '${keyword}') gt -1` : ""
       }`
     )
@@ -122,37 +121,10 @@ const SpotListPage = () => {
         </Button>
       </form>
       {!(spotList.length > 0) && (
-        <div>
-          <C.Title title="熱門主題" />
-          <ul className="flex flex-wrap">
-            {TOPICS.map((topic) => (
-              <C.Topic
-                key={topic.label}
-                background={topic.background}
-                label={topic.label}
-                onClick={() => handleSearchClass(topic.label)}
-              />
-            ))}
-          </ul>
-        </div>
+        <C.Topics topics={TOPICS} onClick={handleSearchClass} />
       )}
       {spotList.length > 0 && (
-        <div>
-          <C.Title title="搜尋結果" />
-          <ul className="flex flex-wrap">
-            {spotList.map((spot) => (
-              <Card
-                key={spot.ScenicSpotID}
-                type={SearchType.ScenicSpot}
-                id={spot.ScenicSpotID}
-                pictureUrl={spot.Picture.PictureUrl1}
-                name={spot.ScenicSpotName}
-                city={spot.City}
-                liStyle={"mb-[36px] [&:nth-last-child(-n+4)]:mb-0"}
-              />
-            ))}
-          </ul>
-        </div>
+        <C.Result list={spotList} type={SearchType.ScenicSpot} />
       )}
     </div>
   );
