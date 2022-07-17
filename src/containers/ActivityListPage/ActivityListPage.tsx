@@ -102,6 +102,7 @@ const ActivityListPage = () => {
                 inputProps={{
                   ...params.inputProps,
                 }}
+                label="搜尋縣市"
               />
             )}
           />
