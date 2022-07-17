@@ -34,7 +34,7 @@ export const Topic = ({
 }) => (
   <li
     style={{ backgroundImage: `url('${background}')` }}
-    className="bg-no-repeat bg-center bg-100% hover:bg-110% text-[#fff] w-[255px] h-[124px] flex justify-center items-center text-[24px] font-bold leading-[34.75px] mb-[12px] mr-[30px] [&:nth-child(4n)]:mr-0 cursor-pointer rounded-[24px] duration-200"
+    className="bg-no-repeat bg-center bg-100% hover:bg-110% text-white w-[255px] h-[124px] flex justify-center items-center text-[24px] font-bold leading-[34.75px] mb-[12px] mr-[30px] [&:nth-child(4n)]:mr-0 cursor-pointer rounded-[24px] duration-200"
     onClick={onClick}
   >
     <span>{label}</span>
