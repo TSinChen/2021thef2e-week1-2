@@ -2,9 +2,12 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, MenuItem, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
+import dayjs from "dayjs";
+import qs from "query-string";
 
 import { SearchType } from "../../../types/enums";
 import { searchTypeMapping } from "../../../utils/functions";
+import { DATE_FORMAT } from "../../../utils/const";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -13,8 +16,16 @@ const Search = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const query = {
+      ...(searchKeyword ? { keyword: searchKeyword } : {}),
+      ...(searchType === SearchType.Activity
+        ? { date: dayjs().format(DATE_FORMAT) }
+        : {}),
+    };
     navigate(
-      `/${searchType}${searchKeyword ? `?keyword=${searchKeyword}` : ""}`
+      `/${searchType}${
+        Object.keys(query).length > 0 && "?" + qs.stringify(query)
+      }`
     );
   };
 
