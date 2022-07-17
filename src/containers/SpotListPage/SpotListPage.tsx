@@ -52,7 +52,7 @@ const SpotListPage = () => {
 
   const handleSearchClass = (topic: string) => {
     getSpotList(
-      "",
+      searchCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null and (Class1 eq '${topic}' or Class2 eq '${topic}' or Class3 eq '${topic}')`
     )
       .then((r: Type.SpotList) => setSpotList(r))

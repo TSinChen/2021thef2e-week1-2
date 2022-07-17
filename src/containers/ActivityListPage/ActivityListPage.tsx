@@ -56,7 +56,7 @@ const ActivityListPage = () => {
 
   const handleSearchClass = (topic: string) => {
     getActivityList(
-      "",
+      searchCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null and (Class1 eq '${topic}' or Class2 eq '${topic}')`
     )
       .then((r: Type.ActivityList) => setActivityList(r))

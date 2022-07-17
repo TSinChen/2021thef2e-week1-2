@@ -50,7 +50,7 @@ const RestaurantListPage = () => {
 
   const handleSearchClass = (topic: string) => {
     getRestaurantList(
-      "",
+      searchCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null and Class eq '${topic}'`
     )
       .then((r: Type.RestaurantList) => setRestaurantList(r))
