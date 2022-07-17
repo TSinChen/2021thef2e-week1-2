@@ -8,54 +8,52 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import { CITIES } from "../../utils/const";
 import * as Type from "../../types/apiResult";
 import * as C from "../../components/ListPage";
-import topic01 from "../../images/topic/spot/01.svg";
-import topic02 from "../../images/topic/spot/02.svg";
-import topic03 from "../../images/topic/spot/03.svg";
-import topic04 from "../../images/topic/spot/04.svg";
-import topic05 from "../../images/topic/spot/05.svg";
-import topic06 from "../../images/topic/spot/06.svg";
-import topic07 from "../../images/topic/spot/07.svg";
-import { getSpotList } from "../../api/apis";
+import topic01 from "../../images/topic/restaurant/01.svg";
+import topic02 from "../../images/topic/restaurant/02.svg";
+import topic03 from "../../images/topic/restaurant/03.svg";
+import topic04 from "../../images/topic/restaurant/04.svg";
+import topic05 from "../../images/topic/restaurant/05.svg";
+import topic06 from "../../images/topic/restaurant/06.svg";
+import { getRestaurantList } from "../../api/apis";
 import { SearchType } from "../../types/enums";
 
 const TOPICS = [
-  { background: topic01, label: "自然風景類" },
-  { background: topic02, label: "觀光工廠類" },
-  { background: topic03, label: "遊憩類" },
-  { background: topic04, label: "休閒農業類" },
-  { background: topic05, label: "生態類" },
-  { background: topic06, label: "溫泉類" },
-  { background: topic07, label: "古蹟類" },
+  { background: topic01, label: "地方特產" },
+  { background: topic02, label: "中式美食" },
+  { background: topic03, label: "甜點冰品" },
+  { background: topic04, label: "異國料理" },
+  { background: topic05, label: "伴手禮" },
+  { background: topic06, label: "素食" },
 ];
 
-const SpotListPage = () => {
+const RestaurantListPage = () => {
   const location = useLocation();
   const [searchCity, setSearchCity] = useState<null | typeof CITIES[number]>(
     null
   );
   const [keyword, setKeyword] = useState("");
-  const [spotList, setSpotList] = useState<Type.SpotList>([]);
+  const [restaurantList, setRestaurantList] = useState<Type.RestaurantList>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    getSpotList(
+    getRestaurantList(
       searchCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null${
         keyword
-          ? ` and (indexOf(Keyword, '${keyword}') gt -1 or indexOf(ScenicSpotName, '${keyword}') gt -1 or indexOf(Description, '${keyword}') gt -1)`
+          ? ` and (indexOf(RestaurantName, '${keyword}') gt -1 or indexOf(Description, '${keyword}') gt -1)`
           : ""
       }`
     )
-      .then((r: Type.SpotList) => setSpotList(r))
+      .then((r: Type.RestaurantList) => setRestaurantList(r))
       .catch((err) => console.error(err));
   };
 
   const handleSearchClass = (topic: string) => {
-    getSpotList(
+    getRestaurantList(
       searchCity?.value || "",
-      `Picture/PictureUrl1 ne null and City ne null and (Class1 eq '${topic}' or Class2 eq '${topic}' or Class3 eq '${topic}')`
+      `Picture/PictureUrl1 ne null and City ne null and Class eq '${topic}'`
     )
-      .then((r: Type.SpotList) => setSpotList(r))
+      .then((r: Type.RestaurantList) => setRestaurantList(r))
       .catch((err) => console.error(err));
   };
 
@@ -64,11 +62,11 @@ const SpotListPage = () => {
     const targetCity = CITIES.find((c) => c.value === city);
     if (typeof city === "string" && targetCity) {
       setSearchCity(targetCity);
-      getSpotList(
+      getRestaurantList(
         targetCity.value,
         `Picture/PictureUrl1 ne null and City ne null`
       )
-        .then((r: Type.SpotList) => setSpotList(r))
+        .then((r: Type.RestaurantList) => setRestaurantList(r))
         .catch((err) => console.error(err));
     }
   }, [location]);
@@ -78,7 +76,7 @@ const SpotListPage = () => {
       <Breadcrumbs
         routes={[
           { label: "首頁", link: "/" },
-          { label: "探索景點", link: "/ScenicSpot" },
+          { label: "品嚐美食", link: "/Restaurant" },
         ]}
       />
       <C.FormContainer onSubmit={handleSubmit}>
@@ -120,11 +118,11 @@ const SpotListPage = () => {
         </Button>
       </C.FormContainer>
       <C.Topics topics={TOPICS} onClick={handleSearchClass} />
-      {spotList.length > 0 && (
-        <C.Result list={spotList} type={SearchType.ScenicSpot} />
+      {restaurantList.length > 0 && (
+        <C.Result list={restaurantList} type={SearchType.Restaurant} />
       )}
     </div>
   );
 };
 
-export default SpotListPage;
+export default RestaurantListPage;
