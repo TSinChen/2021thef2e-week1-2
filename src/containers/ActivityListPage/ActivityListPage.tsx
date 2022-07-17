@@ -33,6 +33,7 @@ const ActivityListPage = () => {
     null
   );
   const [searchDate, setSearchDate] = useState(dayjs().format("YYYY-MM-DD"));
+  const [keyword, setKeyword] = useState("");
   const [activityList, setActivityList] = useState<Type.ActivityList>([]);
 
   const handleSubmit = (e: FormEvent) => {
@@ -42,6 +43,10 @@ const ActivityListPage = () => {
       `Picture/PictureUrl1 ne null and City ne null${
         searchDate
           ? ` and StartTime le ${searchDate} and EndTime ge ${searchDate}`
+          : ""
+      }${
+        keyword
+          ? ` and (indexOf(ActivityName, '${keyword}') gt -1 or indexOf(Description, '${keyword}') gt -1)`
           : ""
       }`
     )
@@ -103,6 +108,14 @@ const ActivityListPage = () => {
             type="date"
             value={searchDate}
             onChange={(e) => setSearchDate(e.target.value)}
+          />
+        </div>
+        <div className="w-[600px]">
+          <TextField
+            fullWidth
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="想找有趣的？請輸入關鍵字"
           />
         </div>
         <Button

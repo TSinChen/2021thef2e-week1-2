@@ -41,7 +41,9 @@ const SpotListPage = () => {
     getSpotList(
       searchCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null${
-        keyword ? ` and indexOf(Keyword, '${keyword}') gt -1` : ""
+        keyword
+          ? ` and (indexOf(Keyword, '${keyword}') gt -1 or indexOf(ScenicSpotName, '${keyword}') gt -1 or indexOf(Description, '${keyword}') gt -1)`
+          : ""
       }`
     )
       .then((r: Type.SpotList) => setSpotList(r))
