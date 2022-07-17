@@ -10,6 +10,10 @@ module.exports = {
         "custom-gray-3": "#1e1e1e",
         "custom-orange": "#FF725E",
       },
+      backgroundSize: {
+        "100%": "100%",
+        "110%": "110%",
+      },
     },
   },
   plugins: [

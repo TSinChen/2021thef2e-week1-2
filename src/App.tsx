@@ -8,6 +8,7 @@ import MainPage from "./containers/MainPage/MainPage";
 import SingleSpotPage from "./containers/SingleSpotPage/SingleSpotPage";
 import SingleActivityPage from "./containers/SingleActivityPage/SingleActivityPage";
 import SingleRestaurantPage from "./containers/SingleRestaurantPage/SingleRestaurantPage";
+import SpotListPage from "./containers/SpotListPage/SpotListPage";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
               path="/Restaurant/:restaurantId"
               element={<SingleRestaurantPage />}
             />
-            {/* <Route path="/ScenicSpot" element={<div>LIST</div>} /> */}
+            <Route path="/ScenicSpot" element={<SpotListPage />} />
           </Routes>
         </main>
       </BrowserRouter>

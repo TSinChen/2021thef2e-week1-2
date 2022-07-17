@@ -8,7 +8,7 @@ export const getSpotList = async (
 ): Promise<Type.SpotList> => {
   return axios
     .get(
-      `/v2/Tourism/${SearchType.ScenicSpot}${city ? `/${city}` : ""}?$top=10${
+      `/v2/Tourism/${SearchType.ScenicSpot}${city ? `/${city}` : ""}?$top=20${
         filter ? `&$filter=${filter}` : ""
       }`
     )
@@ -22,7 +22,7 @@ export const getActivityList = async (
 ): Promise<Type.ActivityList> => {
   return axios
     .get(
-      `/v2/Tourism/${SearchType.Activity}${city ? `/${city}` : ""}?$top=10${
+      `/v2/Tourism/${SearchType.Activity}${city ? `/${city}` : ""}?$top=20${
         filter ? `&$filter=${filter}` : ""
       }`
     )
@@ -36,7 +36,7 @@ export const getRestaurantList = async (
 ): Promise<Type.RestaurantList> => {
   return axios
     .get(
-      `/v2/Tourism/${SearchType.Restaurant}${city ? `/${city}` : ""}?$top=10${
+      `/v2/Tourism/${SearchType.Restaurant}${city ? `/${city}` : ""}?$top=20${
         filter ? `&$filter=${filter}` : ""
       }`
     )

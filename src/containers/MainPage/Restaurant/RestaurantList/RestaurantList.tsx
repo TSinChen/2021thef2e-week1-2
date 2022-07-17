@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 import * as Type from "../../../../types/apiResult";
 import { getRestaurantList } from "../../../../api/apis";
-import { SearchType } from "../../../../types/enums";
 import RestaurantCard from "./RestaurantCard";
 
 const RestaurantList = () => {

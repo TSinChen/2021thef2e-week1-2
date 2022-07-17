@@ -1,8 +1,5 @@
-import { Fragment, ReactNode } from "react";
+import { ReactNode } from "react";
 import * as Type from "../types/apiResult";
-import { cityNameMapping } from "../utils/functions";
-import Card from "./Card";
-import Title from "./Title";
 
 export const Container = ({ children }: { children: ReactNode }) => (
   <div className="mt-[60px] mb-[120px]">{children}</div>
