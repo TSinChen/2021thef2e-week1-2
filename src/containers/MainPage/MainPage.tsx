@@ -5,7 +5,7 @@ import HotSpot from "./HotSpot/HotSpot";
 import Restaurant from "./Restaurant/Restaurant";
 
 const MainPage = () => (
-  <div className="[&>*]:mb-[36px] mb-[144px]">
+  <div className="[&>*]:mb-[36px] mb-[84px]">
     <TitleSearch />
     <PreviewCarousel />
     <RecentActivity />
