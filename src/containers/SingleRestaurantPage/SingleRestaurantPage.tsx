@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { getRestaurantList } from "../../api/apis";
+import { getRestaurantList, getSingleRestaurantById } from "../../api/apis";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Card from "../../components/Card";
 import Tag from "../../components/Tag";
@@ -50,8 +50,8 @@ const SingleRestaurantPage = () => {
   const [recommendList, setRecommendList] = useState<Type.RestaurantList>([]);
 
   useEffect(() => {
-    getRestaurantList("", `RestaurantID eq '${restaurantId}'`)
-      .then((r: Type.RestaurantList) => setRestaurant(r[0]))
+    getSingleRestaurantById(restaurantId as string)
+      .then((r: Type.Restaurant) => setRestaurant(r))
       .catch((err) => console.error(err));
   }, [restaurantId]);
 
