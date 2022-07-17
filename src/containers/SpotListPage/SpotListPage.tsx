@@ -99,6 +99,7 @@ const SpotListPage = () => {
                 inputProps={{
                   ...params.inputProps,
                 }}
+                label="搜尋縣市"
               />
             )}
           />
