@@ -1,26 +1,28 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Autocomplete, Button, MenuItem, TextField } from "@mui/material";
+import { Button, MenuItem, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 
 import { SearchType } from "../../../types/enums";
 import { searchTypeMapping } from "../../../utils/functions";
-import { CITIES } from "../../../utils/const";
 
 const Search = () => {
   const navigate = useNavigate();
   const [searchType, setSearchType] = useState(SearchType.ScenicSpot);
-  const [searchCity, setSearchCity] = useState<null | typeof CITIES[number]>(
-    null
-  );
+  const [searchKeyword, setSearchKeyword] = useState("");
 
-  const handleSubmit = () =>
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     navigate(
-      `/${searchType}${searchCity?.value ? `?city=${searchCity.value}` : ""}`
+      `/${searchType}${searchKeyword ? `?keyword=${searchKeyword}` : ""}`
     );
+  };
 
   return (
-    <div className="pt-[19px] w-[350px] [&>*]:mb-[7px]">
+    <form
+      className="pt-[19px] w-[350px] [&>*]:mb-[7px]"
+      onSubmit={handleSubmit}
+    >
       <div>
         <TextField
           style={{ height: "50px" }}
@@ -38,34 +40,26 @@ const Search = () => {
         </TextField>
       </div>
       <div>
-        <Autocomplete
+        <TextField
           fullWidth
-          options={CITIES}
-          value={searchCity}
-          onChange={(_, value) => setSearchCity(value)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              inputProps={{
-                ...params.inputProps,
-              }}
-            />
-          )}
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          placeholder="想找有趣的？請輸入關鍵字"
         />
       </div>
       <Button
         fullWidth
+        type="submit"
         variant="contained"
         startIcon={<SearchIcon />}
         style={{
           height: "50px",
           backgroundColor: "#7F977B",
         }}
-        onClick={handleSubmit}
       >
         <p className="text-[16px] font-bold tracking-[1em]">搜尋</p>
       </Button>
-    </div>
+    </form>
   );
 };
 
