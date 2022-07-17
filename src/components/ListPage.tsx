@@ -79,12 +79,12 @@ export const Result = ({
       <ul className="flex flex-wrap">
         {list.map((item) => {
           const liStyle = "mb-[36px] [&:nth-last-child(-n+4)]:mb-0";
-
           switch (type) {
             case SearchType.ScenicSpot:
               const spotItem = item as Type.Spot;
               return (
                 <Card
+                  key={spotItem.ScenicSpotID}
                   type={SearchType.ScenicSpot}
                   id={spotItem.ScenicSpotID}
                   pictureUrl={spotItem.Picture.PictureUrl1}
@@ -97,6 +97,7 @@ export const Result = ({
               const activityItem = item as Type.Activity;
               return (
                 <Card
+                  key={activityItem.ActivityID}
                   type={SearchType.Activity}
                   id={activityItem.ActivityID}
                   pictureUrl={activityItem.Picture.PictureUrl1}
@@ -109,6 +110,7 @@ export const Result = ({
               const restaurantItem = item as Type.Restaurant;
               return (
                 <Card
+                  key={restaurantItem.RestaurantID}
                   type={SearchType.Restaurant}
                   id={restaurantItem.RestaurantID}
                   pictureUrl={restaurantItem.Picture.PictureUrl1}
