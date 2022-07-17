@@ -1,9 +1,26 @@
+import { ReactNode, FormEvent } from "react";
+
 import Card from "./Card";
 import * as Type from "../types/apiResult";
 import { SearchType } from "../types/enums";
 
+export const FormContainer = ({
+  children,
+  onSubmit,
+}: {
+  children: ReactNode;
+  onSubmit: (e: FormEvent) => void;
+}) => (
+  <form
+    className="mt-[40px] mb-[48px] mx-[10px] flex [&>*]:mr-[15px] last:mr-0"
+    onSubmit={onSubmit}
+  >
+    {children}
+  </form>
+);
+
 export const Title = ({ title }: { title: string }) => (
-  <div className="mb-[12px] text-[36px] font-light leading-[52px]">{title}</div>
+  <div className="my-[12px] text-[36px] font-light leading-[52px]">{title}</div>
 );
 
 export const Topic = ({

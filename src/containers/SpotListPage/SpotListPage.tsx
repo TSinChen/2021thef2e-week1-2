@@ -79,10 +79,7 @@ const SpotListPage = () => {
           { label: "探索景點", link: "/ScenicSpot" },
         ]}
       />
-      <form
-        className="mt-[40px] mb-[60px] mx-[10px] flex justify-between"
-        onSubmit={handleSubmit}
-      >
+      <C.FormContainer onSubmit={handleSubmit}>
         <div className="w-[240px]">
           <Autocomplete
             fullWidth
@@ -119,10 +116,8 @@ const SpotListPage = () => {
         >
           <p className="text-[16px] font-bold tracking-[1em]">搜尋</p>
         </Button>
-      </form>
-      {!(spotList.length > 0) && (
-        <C.Topics topics={TOPICS} onClick={handleSearchClass} />
-      )}
+      </C.FormContainer>
+      <C.Topics topics={TOPICS} onClick={handleSearchClass} />
       {spotList.length > 0 && (
         <C.Result list={spotList} type={SearchType.ScenicSpot} />
       )}
