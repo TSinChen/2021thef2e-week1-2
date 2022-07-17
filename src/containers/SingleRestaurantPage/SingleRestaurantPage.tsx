@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 import { getRestaurantList, getSingleRestaurantById } from "../../api/apis";
@@ -10,6 +10,7 @@ import * as Type from "../../types/apiResult";
 import { SearchType } from "../../types/enums";
 import { cityNameMapping } from "../../utils/functions";
 import * as C from "../../components/SingleDataPage";
+import Carousel from "../../components/Carousel/Carousel";
 
 const InfoListItem = ({
   label,
@@ -48,6 +49,19 @@ const SingleRestaurantPage = () => {
   const { restaurantId } = useParams();
   const [restaurant, setRestaurant] = useState<null | Type.Restaurant>(null);
   const [recommendList, setRecommendList] = useState<Type.RestaurantList>([]);
+  const pictures = useMemo(() => {
+    const pictures = [];
+    if (restaurant?.Picture?.PictureUrl1) {
+      pictures.push({ src: restaurant.Picture.PictureUrl1 });
+    }
+    if (restaurant?.Picture?.PictureUrl2) {
+      pictures.push({ src: restaurant.Picture.PictureUrl2 });
+    }
+    if (restaurant?.Picture?.PictureUrl3) {
+      pictures.push({ src: restaurant.Picture.PictureUrl3 });
+    }
+    return pictures;
+  }, [restaurant]);
 
   useEffect(() => {
     getSingleRestaurantById(restaurantId as string)
@@ -58,7 +72,7 @@ const SingleRestaurantPage = () => {
   useEffect(() => {
     getRestaurantList(
       restaurant?.City ? cityNameMapping(restaurant.City) : "",
-      `Picture/PictureUrl1 ne null and RestaurantID ne '${restaurantId}'`
+      `Picture/PictureUrl1 ne null and City ne null and RestaurantID ne '${restaurantId}'`
     )
       .then((r: Type.RestaurantList) => setRecommendList(r.slice(0, 4)))
       .catch((err) => console.error(err));
@@ -81,10 +95,9 @@ const SingleRestaurantPage = () => {
           { label: restaurant?.RestaurantName || "", link: "" },
         ]}
       />
-      <C.Banner
-        src={restaurant?.Picture.PictureUrl1}
-        alt={restaurant?.Picture?.PictureDescription1}
-      />
+      <C.CarouselContainer>
+        <Carousel imgs={pictures} />
+      </C.CarouselContainer>
       <C.Name name={restaurant?.RestaurantName} />
       <C.Tags>{restaurant?.Class && <Tag label={restaurant.Class} />}</C.Tags>
       <C.Description type="餐廳" description={restaurant?.Description} />
