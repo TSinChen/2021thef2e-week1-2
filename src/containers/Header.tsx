@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   },
   {
     title: "節慶活動",
-    link: "#",
+    link: "/Activity",
   },
   {
     title: "品嘗美食",
