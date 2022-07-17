@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# 臺灣旅遊網站
+![image](https://user-images.githubusercontent.com/69808055/179402013-41e767e2-04d8-40f9-9d8a-440a56cc129a.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 使用方法
+直接前往 https://2021thef2e-week1.vercel.app/ 瀏覽網站，點擊各個卡片，會跳轉到該景點、活動或餐廳的資訊頁。在主頁搜尋，或是點擊導覽列的選項，會跳轉到列表頁。
 
-## Available Scripts
+## 專案說明
+- 這是由六角學院發起的活動 - [The F2E 前端 & UI 修煉精神時光屋](https://2021.thef2e.com/)，本次主題為**臺灣旅遊網**，串接了[交通部 TDX API](https://tdx.transportdata.tw/)。
+- 使用 React 搭配 TypeScript 進行開發。
+- 樣式部分，使用 Tailwind CSS 及 Material UI，同時也是我第一次使用 Tailwind CSS。
+- 設計部分，感謝[設計師](https://2021.thef2e.com/users/6296427084285739247/)，[設計稿 Figma 在此](https://www.figma.com/file/5HQAZ2bunGNKma2fwU0aNZ/The-F2E-3rd---Week1-%E5%8F%B0%E7%81%A3%E6%97%85%E9%81%8A%E6%99%AF%E9%BB%9E%E5%B0%8E%E8%A6%BD?node-id=5%3A1106)。
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 資料夾結構
+```
+└─src
+    │
+    ├─api                          # API 相關，使用 Axios
+    │
+    ├─components                   # 將常用樣式、功能切成 component 以重複使用
+    │  └─Carousel                  # 使用 Swiper 來實現 Carousel 功能
+    │
+    ├─containers                   # 各頁面
+    │
+    ├─images
+    │
+    ├─styles                       # 預設樣式
+    │
+    └─types                        # TypeScript 的型別
+    │
+    └─utils                        # 常用 consants、functions
+```
