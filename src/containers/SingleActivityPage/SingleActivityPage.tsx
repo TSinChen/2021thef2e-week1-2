@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import dayjs from "dayjs";
 
 import { getActivityList, getSingleActivityById } from "../../api/apis";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -11,6 +11,7 @@ import * as Type from "../../types/apiResult";
 import { SearchType } from "../../types/enums";
 import { cityNameMapping } from "../../utils/functions";
 import * as C from "../../components/SingleDataPage";
+import Carousel from "../../components/Carousel/Carousel";
 
 const DATE_FORMAT = "YYYY/MM/DD HH:mm";
 
@@ -51,6 +52,19 @@ const SingleActivityPage = () => {
   const { activityId } = useParams();
   const [activity, setActivity] = useState<null | Type.Activity>(null);
   const [recommendList, setRecommendList] = useState<Type.ActivityList>([]);
+  const pictures = useMemo(() => {
+    const pictures = [];
+    if (activity?.Picture?.PictureUrl1) {
+      pictures.push({ src: activity.Picture.PictureUrl1 });
+    }
+    if (activity?.Picture?.PictureUrl2) {
+      pictures.push({ src: activity.Picture.PictureUrl2 });
+    }
+    if (activity?.Picture?.PictureUrl3) {
+      pictures.push({ src: activity.Picture.PictureUrl3 });
+    }
+    return pictures;
+  }, [activity]);
 
   useEffect(() => {
     getSingleActivityById(activityId as string)
@@ -61,7 +75,7 @@ const SingleActivityPage = () => {
   useEffect(() => {
     getActivityList(
       activity?.City ? cityNameMapping(activity.City) : "",
-      `Picture/PictureUrl1 ne null and ActivityID ne '${activityId}'`
+      `Picture/PictureUrl1 ne null and City ne null and ActivityID ne '${activityId}'`
     )
       .then((r: Type.ActivityList) => setRecommendList(r.slice(0, 4)))
       .catch((err) => console.error(err));
@@ -84,10 +98,9 @@ const SingleActivityPage = () => {
           { label: activity?.ActivityName || "", link: "" },
         ]}
       />
-      <C.Banner
-        src={activity?.Picture.PictureUrl1}
-        alt={activity?.Picture?.PictureDescription1}
-      />
+      <C.CarouselContainer>
+        <Carousel imgs={pictures} />
+      </C.CarouselContainer>
       <C.Name name={activity?.ActivityName} />
       <C.Tags>
         {activity?.Class1 && <Tag label={activity.Class1} />}

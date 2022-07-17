@@ -5,18 +5,8 @@ export const Container = ({ children }: { children: ReactNode }) => (
   <div className="mt-[60px] mb-[120px]">{children}</div>
 );
 
-export const Banner = ({
-  src,
-  alt,
-}: {
-  src: Type.Picture["PictureUrl1"];
-  alt: Type.Picture["PictureDescription1"];
-}) => (
-  <img
-    src={src}
-    alt={alt || ""}
-    className="w-full h-[400px] my-[30px] object-cover rounded-[24px]"
-  />
+export const CarouselContainer = ({ children }: { children: ReactNode }) => (
+  <div className="my-[30px]">{children}</div>
 );
 
 export const Name = ({ name }: { name: Type.Name }) => (

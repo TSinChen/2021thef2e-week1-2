@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 import { getSingleSpotById, getSpotList } from "../../api/apis";
@@ -10,6 +10,7 @@ import * as Type from "../../types/apiResult";
 import { SearchType } from "../../types/enums";
 import { cityNameMapping } from "../../utils/functions";
 import * as C from "../../components/SingleDataPage";
+import Carousel from "../../components/Carousel/Carousel";
 
 const InfoListItem = ({
   label,
@@ -48,6 +49,19 @@ const SpotPage = () => {
   const { spotId } = useParams();
   const [spot, setSpot] = useState<null | Type.Spot>(null);
   const [recommendList, setRecommendList] = useState<Type.SpotList>([]);
+  const pictures = useMemo(() => {
+    const pictures = [];
+    if (spot?.Picture?.PictureUrl1) {
+      pictures.push({ src: spot.Picture.PictureUrl1 });
+    }
+    if (spot?.Picture?.PictureUrl2) {
+      pictures.push({ src: spot.Picture.PictureUrl2 });
+    }
+    if (spot?.Picture?.PictureUrl3) {
+      pictures.push({ src: spot.Picture.PictureUrl3 });
+    }
+    return pictures;
+  }, [spot]);
 
   useEffect(() => {
     getSingleSpotById(spotId as string)
@@ -58,7 +72,7 @@ const SpotPage = () => {
   useEffect(() => {
     getSpotList(
       spot?.City ? cityNameMapping(spot.City) : "",
-      `Picture/PictureUrl1 ne null and ScenicSpotID ne '${spotId}'`
+      `Picture/PictureUrl1 ne null and City ne null and ScenicSpotID ne '${spotId}'`
     )
       .then((r: Type.SpotList) => setRecommendList(r.slice(0, 4)))
       .catch((err) => console.error(err));
@@ -81,10 +95,9 @@ const SpotPage = () => {
           { label: spot?.ScenicSpotName || "", link: "" },
         ]}
       />
-      <C.Banner
-        src={spot?.Picture.PictureUrl1}
-        alt={spot?.Picture.PictureDescription1}
-      />
+      <C.CarouselContainer>
+        <Carousel imgs={pictures} />
+      </C.CarouselContainer>
       <C.Name name={spot?.ScenicSpotName} />
       <C.Tags>
         {spot?.Class1 && <Tag label={spot.Class1} />}
