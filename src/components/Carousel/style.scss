@@ -1,0 +1,47 @@
+.swiper-button- {
+  &disabled {
+    opacity: 1 !important;
+    cursor: pointer !important;
+    pointer-events: inherit !important;
+  }
+
+  &prev,
+  &next {
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    width: 40px;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  &prev {
+    background-image: url(../../images/arrow-left.svg);
+    left: 0;
+    margin-left: 30px;
+  }
+
+  &next {
+    background-image: url(../../images/arrow-right.svg);
+    right: 0;
+    margin-right: 30px;
+  }
+}
+
+.swiper-pagination {
+  padding-right: 42px;
+  text-align: end;
+
+  &-bullet {
+    background-color: #e5e5e5;
+    width: 16px;
+    height: 16px;
+    margin: 0 6px !important;
+
+    &-active {
+      background-color: #fff;
+    }
+  }
+}
