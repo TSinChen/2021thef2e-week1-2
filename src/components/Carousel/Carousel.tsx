@@ -15,7 +15,6 @@ const Carousel = ({ imgs }: Props) => (
     <Swiper
       slidesPerView={1}
       loop={imgs.length > 1}
-      initialSlide={1}
       navigation={true}
       pagination={{ clickable: true }}
       modules={[Navigation, Pagination]}
