@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import qs from "query-string";
@@ -30,47 +30,52 @@ const TOPICS = [
 
 const SpotListPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchCity, setSearchCity] = useState<null | typeof CITIES[number]>(
     null
   );
-  const [keyword, setKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [spotList, setSpotList] = useState<Type.SpotList>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const query = {
+      ...(searchCity?.value ? { city: searchCity.value } : {}),
+      ...(searchKeyword ? { keyword: searchKeyword } : {}),
+    };
+    navigate(`/ScenicSpot?${qs.stringify(query)}`);
+  };
+
+  const handleSearchClass = (topic: string) => {
+    const query = { ...qs.parse(location.search), topic };
+    navigate(`/ScenicSpot?${qs.stringify(query)}`);
+  };
+
+  useEffect(() => {
+    const city = qs.parse(location.search)?.city as string;
+    const keyword = qs.parse(location.search)?.keyword as string;
+    const topic = qs.parse(location.search)?.topic as string;
+    const targetCity = CITIES.find((c) => c.value === city);
+    if (targetCity) {
+      setSearchCity(targetCity);
+    }
+    if (keyword) {
+      setSearchKeyword(keyword);
+    }
     getSpotList(
-      searchCity?.value || "",
+      targetCity?.value || "",
       `Picture/PictureUrl1 ne null and City ne null${
         keyword
           ? ` and (indexOf(Keyword, '${keyword}') gt -1 or indexOf(ScenicSpotName, '${keyword}') gt -1 or indexOf(Description, '${keyword}') gt -1)`
+          : ""
+      }${
+        topic
+          ? ` and (Class1 eq '${topic}' or Class2 eq '${topic}' or Class3 eq '${topic}')`
           : ""
       }`
     )
       .then((r: Type.SpotList) => setSpotList(r))
       .catch((err) => console.error(err));
-  };
-
-  const handleSearchClass = (topic: string) => {
-    getSpotList(
-      searchCity?.value || "",
-      `Picture/PictureUrl1 ne null and City ne null and (Class1 eq '${topic}' or Class2 eq '${topic}' or Class3 eq '${topic}')`
-    )
-      .then((r: Type.SpotList) => setSpotList(r))
-      .catch((err) => console.error(err));
-  };
-
-  useEffect(() => {
-    const city = qs.parse(location.search)?.city;
-    const targetCity = CITIES.find((c) => c.value === city);
-    if (typeof city === "string" && targetCity) {
-      setSearchCity(targetCity);
-      getSpotList(
-        targetCity.value,
-        `Picture/PictureUrl1 ne null and City ne null`
-      )
-        .then((r: Type.SpotList) => setSpotList(r))
-        .catch((err) => console.error(err));
-    }
   }, [location]);
 
   return (
@@ -101,8 +106,8 @@ const SpotListPage = () => {
         <div className="w-[600px]">
           <TextField
             fullWidth
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
             placeholder="想找有趣的？請輸入關鍵字"
           />
         </div>
