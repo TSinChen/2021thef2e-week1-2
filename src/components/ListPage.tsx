@@ -3,6 +3,7 @@ import { ReactNode, FormEvent } from "react";
 import Card from "./Card";
 import * as Type from "../types/apiResult";
 import { SearchType } from "../types/enums";
+import NO_DATA from "../images/no-data.svg";
 
 export const FormContainer = ({
   children,
@@ -76,54 +77,67 @@ export const Result = ({
   return (
     <div>
       <Title title="搜尋結果" />
-      <ul className="flex flex-wrap">
-        {list.map((item) => {
-          const liStyle = "mb-[36px] [&:nth-last-child(-n+4)]:mb-0";
-          switch (type) {
-            case SearchType.ScenicSpot:
-              const spotItem = item as Type.Spot;
-              return (
-                <Card
-                  key={spotItem.ScenicSpotID}
-                  type={SearchType.ScenicSpot}
-                  id={spotItem.ScenicSpotID}
-                  pictureUrl={spotItem.Picture.PictureUrl1}
-                  name={spotItem.ScenicSpotName}
-                  city={spotItem.City}
-                  liStyle={liStyle}
-                />
-              );
-            case SearchType.Activity:
-              const activityItem = item as Type.Activity;
-              return (
-                <Card
-                  key={activityItem.ActivityID}
-                  type={SearchType.Activity}
-                  id={activityItem.ActivityID}
-                  pictureUrl={activityItem.Picture.PictureUrl1}
-                  name={activityItem.ActivityName}
-                  city={activityItem.City}
-                  liStyle={liStyle}
-                />
-              );
-            case SearchType.Restaurant:
-              const restaurantItem = item as Type.Restaurant;
-              return (
-                <Card
-                  key={restaurantItem.RestaurantID}
-                  type={SearchType.Restaurant}
-                  id={restaurantItem.RestaurantID}
-                  pictureUrl={restaurantItem.Picture.PictureUrl1}
-                  name={restaurantItem.RestaurantName}
-                  city={restaurantItem.City}
-                  liStyle={liStyle}
-                />
-              );
-            default:
-              return <></>;
-          }
-        })}
-      </ul>
+      {list.length > 0 ? (
+        <ul className="flex flex-wrap">
+          {list.map((item) => {
+            const liStyle = "mb-[36px] [&:nth-last-child(-n+4)]:mb-0";
+            switch (type) {
+              case SearchType.ScenicSpot:
+                const spotItem = item as Type.Spot;
+                return (
+                  <Card
+                    key={spotItem.ScenicSpotID}
+                    type={SearchType.ScenicSpot}
+                    id={spotItem.ScenicSpotID}
+                    pictureUrl={spotItem.Picture.PictureUrl1}
+                    name={spotItem.ScenicSpotName}
+                    city={spotItem.City}
+                    liStyle={liStyle}
+                  />
+                );
+              case SearchType.Activity:
+                const activityItem = item as Type.Activity;
+                return (
+                  <Card
+                    key={activityItem.ActivityID}
+                    type={SearchType.Activity}
+                    id={activityItem.ActivityID}
+                    pictureUrl={activityItem.Picture.PictureUrl1}
+                    name={activityItem.ActivityName}
+                    city={activityItem.City}
+                    liStyle={liStyle}
+                  />
+                );
+              case SearchType.Restaurant:
+                const restaurantItem = item as Type.Restaurant;
+                return (
+                  <Card
+                    key={restaurantItem.RestaurantID}
+                    type={SearchType.Restaurant}
+                    id={restaurantItem.RestaurantID}
+                    pictureUrl={restaurantItem.Picture.PictureUrl1}
+                    name={restaurantItem.RestaurantName}
+                    city={restaurantItem.City}
+                    liStyle={liStyle}
+                  />
+                );
+              default:
+                return <></>;
+            }
+          })}
+        </ul>
+      ) : (
+        <div className="pt-[68px] pb-[23px] flex flex-col items-center">
+          <img src={NO_DATA} alt="" className="w-[80px] mb-[11px]" />
+          <div className="flex flex-col items-center text-center">
+            <p className="text-[#7F977B] text-[20px] font-bold leading-[34px]">
+              目前查無資料
+              <br />
+              請重新搜尋
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

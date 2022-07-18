@@ -126,9 +126,7 @@ const SpotListPage = () => {
         </Button>
       </C.FormContainer>
       <C.Topics topics={TOPICS} onClick={handleSearchClass} />
-      {spotList.length > 0 && (
-        <C.Result list={spotList} type={SearchType.ScenicSpot} />
-      )}
+      <C.Result list={spotList} type={SearchType.ScenicSpot} />
     </div>
   );
 };
