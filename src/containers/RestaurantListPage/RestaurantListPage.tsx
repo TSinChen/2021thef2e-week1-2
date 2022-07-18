@@ -120,9 +120,7 @@ const RestaurantListPage = () => {
         </Button>
       </C.FormContainer>
       <C.Topics topics={TOPICS} onClick={handleSearchClass} />
-      {restaurantList.length > 0 && (
-        <C.Result list={restaurantList} type={SearchType.Restaurant} />
-      )}
+      <C.Result list={restaurantList} type={SearchType.Restaurant} />
     </div>
   );
 };

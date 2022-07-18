@@ -137,9 +137,7 @@ const ActivityListPage = () => {
         </Button>
       </C.FormContainer>
       <C.Topics topics={TOPICS} onClick={handleSearchClass} />
-      {activityList.length > 0 && (
-        <C.Result list={activityList} type={SearchType.Activity} />
-      )}
+      <C.Result list={activityList} type={SearchType.Activity} />
     </div>
   );
 };
