@@ -6,6 +6,11 @@
   letter-spacing: 0.03em;
 }
 
+*::selection {
+  background-color: #7f977b;
+  color: #fff;
+}
+
 body {
   font-family: "Noto Sans TC", sans-serif;
 }
