@@ -14,6 +14,10 @@ module.exports = {
         "100%": "100%",
         "110%": "110%",
       },
+      screens: {
+        sm: { max: "375px" },
+        "sm-min": { min: "376px" },
+      },
     },
   },
   plugins: [
