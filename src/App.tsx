@@ -17,7 +17,7 @@ function App() {
     <Fragment>
       <Header />
       <BrowserRouter>
-        <main className="max-w-[1200px] mx-auto px-[45px]">
+        <main className="max-w-[1200px] mx-auto px-[45px] sm:max-w-none sm:px-[15px]">
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/ScenicSpot/:spotId" element={<SingleSpotPage />} />
