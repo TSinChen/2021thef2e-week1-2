@@ -2,7 +2,7 @@
 ![image](https://user-images.githubusercontent.com/69808055/179402013-41e767e2-04d8-40f9-9d8a-440a56cc129a.png)
 
 ## 使用方法
-直接前往 https://2021thef2e-week1.vercel.app/ 瀏覽網站，點擊各個卡片，會跳轉到該景點、活動或餐廳的資訊頁。在主頁搜尋，或是點擊導覽列的選項，會跳轉到列表頁。
+直接前往 https://2021thef2e-week1-2.vercel.app/ 瀏覽網站，點擊各個卡片，會跳轉到該景點、活動或餐廳的資訊頁。在主頁搜尋，或是點擊導覽列的選項，會跳轉到列表頁。
 
 ## 專案說明
 - 這是由六角學院發起的活動 - [The F2E 前端 & UI 修煉精神時光屋](https://2021.thef2e.com/)，本次主題為**臺灣旅遊網**，串接了[交通部 TDX API](https://tdx.transportdata.tw/)。
