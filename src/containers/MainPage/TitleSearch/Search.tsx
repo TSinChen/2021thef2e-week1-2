@@ -24,7 +24,7 @@ const Search = () => {
     };
     navigate(
       `/${searchType}${
-        Object.keys(query).length > 0 && "?" + qs.stringify(query)
+        Object.keys(query).length > 0 ? "?" + qs.stringify(query) : ""
       }`
     );
   };
